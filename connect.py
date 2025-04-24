@@ -8,6 +8,6 @@ mydb = mysql.connector.connect(
   # ssl_verify_cert = True,
   # ssl_verify_identity = True
 )
-mydb.cursor().execute("create database if not exists stu")
-mydb.cursor().execute("use stu")
+mydb.cursor().execute("create database if not exists school")
+mydb.cursor().execute("use school")
 db = mydb.cursor()

@@ -1,0 +1,154 @@
+students_data = [
+    (101001, 'Riya Sharma', 'Delhi', 'Delhi'),
+    (101002, 'Aryan Singh', 'Lucknow', 'Uttar Pradesh'),
+    (101003, 'Kavya Jain', 'Jaipur', 'Rajasthan'),
+    (101004, 'Ansh Verma', 'Noida', 'Uttar Pradesh'),
+    (101005, 'Tanvi Gupta', 'Gurgaon', 'Haryana'),
+    (101006, 'Ishaan Mehta', 'Indore', 'Madhya Pradesh'),
+    (101007, 'Saanvi Kapoor', 'Mumbai', 'Maharashtra'),
+    (101008, 'Vivaan Malhotra', 'Chandigarh', 'Punjab'),
+    (101009, 'Mehul Ahuja', 'Kolkata', 'West Bengal'),
+    (101010, 'Neha Rathi', 'Patna', 'Bihar'),
+    (101011, 'Raghav Yadav', 'Varanasi', 'Uttar Pradesh'),
+    (101012, 'Diya Nair', 'Thiruvananthapuram', 'Kerala'),
+    (101013, 'Aarav Bansal', 'Bhopal', 'Madhya Pradesh'),
+    (101014, 'Ira Shah', 'Ahmedabad', 'Gujarat'),
+    (101015, 'Yuvraj Rana', 'Shimla', 'Himachal Pradesh'),
+    (101016, 'Priya Sethi', 'Amritsar', 'Punjab'),
+    (101017, 'Nikhil Dube', 'Kanpur', 'Uttar Pradesh'),
+    (101018, 'Lavanya Pillai', 'Chennai', 'Tamil Nadu'),
+    (101019, 'Zoya Qureshi', 'Hyderabad', 'Telangana'),
+    (101020, 'Dev Mehta', 'Surat', 'Gujarat'),
+]
+
+
+
+
+
+/* ---------- 1. Schema (unchanged) ---------- */
+CREATE TABLE `Employee` (
+  `Emp_Id`   INT(6)  NOT NULL AUTO_INCREMENT,
+  `Name`     CHAR(50) NOT NULL,
+  `Salary`   INT(11)  DEFAULT 15000,
+  `Position` VARCHAR(30) NOT NULL,
+  `City`     CHAR(30) NOT NULL,
+  `state`    CHAR(30) NOT NULL,
+  PRIMARY KEY (`Emp_Id`) /*T![clustered_index] CLUSTERED */
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_bin;
+
+/* ---------- 2. Data (one row per employee) ---------- */
+INSERT INTO `Employee` (`Emp_Id`, `Name`,           `Salary`, `Position`, `City`,     `state`)
+VALUES
+/* ---- TEACHERS (9) ---- */
+( 1, 'Dr. Aniket Deshmukh', 42000, 'Teacher', 'Pune',      'Maharashtra'),
+( 2, 'Ms. Charu Nair',      41000, 'Teacher', 'Kochi',     'Kerala'),
+( 3, 'Mrs. Kavita Reddy',   40000, 'Teacher', 'Hyderabad', 'Telangana'),
+( 4, 'Mr. Raghav Mehta',    39500, 'Teacher', 'Jaipur',    'Rajasthan'),
+( 5, 'Mrs. Isha Khanna',    39000, 'Teacher', 'Delhi',     'Delhi'),
+( 6, 'Ms. Sneha Ghosh',     40500, 'Teacher', 'Kolkata',   'West Bengal'),
+( 7, 'Mr. Satyam Singh',    40000, 'Teacher', 'Lucknow',   'Uttar Pradesh'),
+( 8, 'Dr. Pramila Sen',     40000, 'Teacher', 'Bhopal',    'Madhya Pradesh'),
+( 9, 'Mr. Arvind Kapoor',   39800, 'Teacher', 'Chandigarh','Chandigarh'),
+
+/* ---- SUPPORT STAFF (4) ---- */
+(10, 'Mr. Manoj Kulkarni',  25000, 'Office Administrator', 'Pune',    'Maharashtra'),
+(11, 'Mrs. Poonam Das',     24000, 'Librarian',            'Kolkata', 'West Bengal'),
+(12, 'Mr. Arvind Gupta',    22000, 'Lab Assistant',        'Delhi',   'Delhi'),
+(13, 'Ms. Reshma Ali',      18000, 'Sweeper',              'Jaipur',  'Rajasthan');
+
+
+
+
+
+
+/* ---------- 1. Schema ---------- */
+CREATE TABLE `Subject` (
+  `ID`          INT(4)  NOT NULL AUTO_INCREMENT,
+  `Sub_Name`    CHAR(30) NOT NULL,
+  `Emp_Id`      INT(6)  NOT NULL,
+  `Enrollments` INT(4)  NOT NULL,
+  PRIMARY KEY (`ID`) /*T![clustered_index] CLUSTERED */
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_bin;
+
+/* ---------- 2. Data ---------- */
+INSERT INTO `Subject` (`ID`, `Sub_Name`,        `Emp_Id`, `Enrollments`)
+VALUES
+/* Aniket Deshmukh teaches two subjects */
+( 11, 'Mathematics',   101,  58),
+( 12, 'Digital Logics',101,  42),
+
+/* Charu Nair teaches two subjects */
+( 21, 'Science',       107,  60),
+( 22, 'Biology',       107,  55),
+
+/* Kavita Reddy teaches two subjects */
+( 31, 'English',       113,  62),
+( 32, 'Literature',    113,  47),
+
+/* Raghav Mehta teaches two subjects */
+( 41, 'History',       129,  50),
+( 42, 'Civics',        129,  48),
+
+/* Isha Khanna teaches two subjects */
+( 51, 'Geography',     142,  53),
+( 52, 'Economics',     142,  51),
+
+/* Sneha Ghosh teaches two subjects */
+( 61, 'Computer',      158,  57),
+( 62, 'DBMS',          158,  44),
+
+/* Single‑subject teachers */
+( 71, 'Physics',       176,  49),
+( 81, 'Chemistry',     183,  52);
+
+
+
+/* ---------- 1. Schema ---------- */
+CREATE TABLE `Teacher` (
+  `Emp_Id` INT(6)  NOT NULL,
+  `Name`   CHAR(50) NOT NULL,
+  `Sub_ID` INT(4)  NOT NULL
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_bin;
+
+/* ---------- 2. Data ---------- */
+INSERT INTO `Teacher` (`Emp_Id`, `Name`,               `Sub_ID`)
+VALUES
+/* ----- Dr. Aniket Deshmukh ----- */
+(101, 'Dr. Aniket Deshmukh', 11),  -- Mathematics
+(101, 'Dr. Aniket Deshmukh', 12),  -- Digital Logics
+
+/* ----- Ms. Charu Nair ----- */
+(107, 'Ms. Charu Nair',      21),  -- Science
+(107, 'Ms. Charu Nair',      22),  -- Biology
+
+/* ----- Mrs. Kavita Reddy ----- */
+(113, 'Mrs. Kavita Reddy',   31),  -- English
+(113, 'Mrs. Kavita Reddy',   32),  -- Literature
+
+/* ----- Mr. Raghav Mehta ----- */
+(129, 'Mr. Raghav Mehta',    41),  -- History
+(129, 'Mr. Raghav Mehta',    42),  -- Civics
+
+/* ----- Mrs. Isha Khanna ----- */
+(142, 'Mrs. Isha Khanna',    51),  -- Geography
+(142, 'Mrs. Isha Khanna',    52),  -- Economics
+
+/* ----- Ms. Sneha Ghosh ----- */
+(158, 'Ms. Sneha Ghosh',     61),  -- Computer
+(158, 'Ms. Sneha Ghosh',     62),  -- DBMS
+
+/* ----- Single‑subject teachers ----- */
+(176, 'Mr. Satyam Singh',    71),  -- Physics
+(183, 'Dr. Pramila Sen',     81);  -- Chemistry
+
+/* ---------- 3. Referential Integrity ---------- */
+ALTER TABLE `Teacher`
+  ADD CONSTRAINT fk_teacher_subject
+    FOREIGN KEY (`Sub_ID`)
+      REFERENCES `Subject`(`ID`);
