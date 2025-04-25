@@ -1,5 +1,5 @@
 from connect import db,mydb
-query="drop database stu"
+query="drop database school"
 db.execute(query)
 t=db.fetchall()
 for i in t:
